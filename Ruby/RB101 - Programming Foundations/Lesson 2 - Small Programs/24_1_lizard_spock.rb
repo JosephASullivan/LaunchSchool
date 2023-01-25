@@ -2,21 +2,34 @@ VALID_CHOICES = %w[rock paper scissors spock lizard]
 GAMES_TO_WIN = 3
 
 def greet_player
+  system('clear')
   prompt('Welcome to Rock-Paper-Scissors-Lizard-Spock!')
   prompt("The first player to win #{GAMES_TO_WIN} games is the grand winner!")
-  system("clear")
+  await_player
+end
+
+def await_player
+  prompt('Hit enter/return to continue...')
+  gets.chomp
+  system('clear')
 end
 
 def prompt(message)
   Kernel.puts("=> #{message}")
-  sleep(1)
+  sleep(0.75)
 end
 
 def play_match
-  prompt 'A new match has begun!'
   games_won = { 'you': 0, 'the computer': 0 }
   grand_winner = nil
+  game_count = 0
+
+  prompt 'A new match has begun!'
+
   loop do
+    game_count += 1
+    prompt("GAME #{game_count}")
+
     game_result = play_game
     display_result(game_result)
     update_win_counts(games_won, game_result)
@@ -26,6 +39,7 @@ def play_match
       break
     end
     announce_win_counts(games_won, 'current')
+    await_player
   end
   announce_win_counts(games_won, 'final')
 end
@@ -72,6 +86,7 @@ def handle_s
 end
 
 def display_choices(choice, opponent_choice)
+  system('clear')
   prompt("You chose #{choice}.")
   prompt("Your opponent chose #{opponent_choice}.")
 end
