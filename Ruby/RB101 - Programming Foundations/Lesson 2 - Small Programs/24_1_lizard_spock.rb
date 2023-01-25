@@ -57,13 +57,13 @@ def resolve_choice
   loop do
     prompt("Choose one: #{VALID_CHOICES.join(', ')}")
     choice = Kernel.gets.chomp.downcase
-    choice = handle_s if choice == 's'
-    VALID_CHOICES.each do |option|
-      choice = option if option.start_with? choice
+    unless choice.empty?
+      choice = handle_s if choice == 's'
+      VALID_CHOICES.each do |option|
+        choice = option if option.start_with? choice
+      end
+      return choice if VALID_CHOICES.include?(choice)
     end
-
-    return choice if VALID_CHOICES.include?(choice)
-
     prompt('Invalid choice. Try again.')
   end
 end
