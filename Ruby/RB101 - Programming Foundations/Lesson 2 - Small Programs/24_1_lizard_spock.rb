@@ -36,17 +36,15 @@ end
 def resolve_choice
   loop do
     prompt("Choose one: #{VALID_CHOICES.join(', ')}")
-    choice = Kernel.gets().chomp().downcase()
+    choice = Kernel.gets.chomp.downcase
     choice = handle_s if choice == 's'
     VALID_CHOICES.each do |option|
       choice = option if option.start_with? choice
     end
 
-    if VALID_CHOICES.include?(choice)
-      return choice
-    else
-      prompt("Invalid choice. Try again.")
-    end
+    return choice if VALID_CHOICES.include?(choice)
+
+    prompt('Invalid choice. Try again.')
   end
 end
 
@@ -54,9 +52,9 @@ end
 # which could mean scissors or Spock.
 def handle_s
   loop do
-    prompt("Not sure if you mean scissors or Spock.")
-    prompt("Enter 1 for scissors or 2 for Spock.")
-    case gets.chomp()
+    prompt('Not sure if you mean scissors or Spock.')
+    prompt('Enter 1 for scissors or 2 for Spock.')
+    case gets.chomp
     when '1'
       return 'scissors'
     when '2'
@@ -80,8 +78,9 @@ end
 # We can use this to quickly determine the winner of any given game.
 def get_result(player1, player2)
   return 'tie' if player1 == player2 # Handle case of a tie
+
   index_difference = VALID_CHOICES.index(player1) - VALID_CHOICES.index(player2)
-  ((index_difference + 4) % 5).odd? ? "lose" : "win"
+  ((index_difference + 4) % 5).odd? ? 'lose' : 'win'
 end
 
 def display_result(result)
@@ -110,15 +109,15 @@ def announce_win_counts(games_won, match_status)
 end
 
 def play_again?
-  prompt("Do you want to play again? (Y/N)")
-  answer = Kernel.gets().chomp()
-  answer.downcase().start_with?('y')
+  prompt('Do you want to play again? (Y/N)')
+  answer = Kernel.gets.chomp
+  answer.downcase.start_with?('y')
 end
 
-prompt("Welcome to Rock-Paper-Scissors-Lizard-Spock!")
+prompt('Welcome to Rock-Paper-Scissors-Lizard-Spock!')
 prompt("The first player to win #{GAMES_TO_WIN} games is the grand winner!")
 loop do
   play_match
   break unless play_again?
 end
-prompt "Thanks for playing. Goodbye!"
+prompt 'Thanks for playing. Goodbye!'

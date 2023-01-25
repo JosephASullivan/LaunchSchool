@@ -65,7 +65,7 @@ loop do # main loop
   result = monthly_payment
 
   prompt("Your monthly payment will be $#{result}")
-  prompt("do you want to perform another calculation? (Y/N)")
+  prompt('do you want to perform another calculation? (Y/N)')
   answer = Kernel.gets().chomp()
   break unless answer.downcase().start_with?('y')
 end
