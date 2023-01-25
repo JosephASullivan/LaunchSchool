@@ -1,4 +1,4 @@
-VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
+VALID_CHOICES = %w[rock paper scissors spock lizard]
 GAMES_TO_WIN = 3
 
 def prompt(message)
@@ -7,11 +7,11 @@ def prompt(message)
 end
 
 def play_match
-  prompt "A new match has begun!"
+  prompt 'A new match has begun!'
   games_won = { 'you': 0, 'the computer': 0 }
   grand_winner = nil
   loop do
-    game_result = play_game()
+    game_result = play_game
     display_result(game_result)
     update_win_counts(games_won, game_result)
     grand_winner = determine_grand_winner(games_won)
@@ -20,7 +20,7 @@ def play_match
       break
     end
     announce_win_counts(games_won, 'current')
-    if !play_another?("game")
+    unless play_another?('game')
       prompt "You quit the match!"
       break
     end

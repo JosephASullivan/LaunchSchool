@@ -1,7 +1,6 @@
 # .rubocop.yml for RB101 Lessons 2-5 (17 Mar 2021)
 
 AllCops:
-  NewCops: enable
   # Display cop names
   DisplayCopNames: true
   # Display Extra details
