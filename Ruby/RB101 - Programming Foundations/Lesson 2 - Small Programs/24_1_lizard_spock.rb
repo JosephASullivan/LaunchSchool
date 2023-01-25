@@ -124,9 +124,9 @@ loop do
     computer_choice = VALID_CHOICES.sample
 
     display_choices(choice, computer_choice)
-    get_result(choice, computer_choice) # Returns result of one game as 'win', 'lose', or 'tie'
-    display_result(game_result)
-    update_win_counts(games_won, game_result)
+    result = get_result(choice, computer_choice) # Returns result of one game as 'win', 'lose', or 'tie'
+    display_result(result)
+    update_win_counts(games_won, result)
 
     grand_winner = determine_grand_winner(games_won)
     if grand_winner
