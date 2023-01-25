@@ -1,6 +1,12 @@
 VALID_CHOICES = %w[rock paper scissors spock lizard]
 GAMES_TO_WIN = 3
 
+def greet_player
+  prompt('Welcome to Rock-Paper-Scissors-Lizard-Spock!')
+  prompt("The first player to win #{GAMES_TO_WIN} games is the grand winner!")
+  system("clear")
+end
+
 def prompt(message)
   Kernel.puts("=> #{message}")
   sleep(1)
@@ -114,9 +120,8 @@ def play_again?
   answer.downcase.start_with?('y')
 end
 
-prompt('Welcome to Rock-Paper-Scissors-Lizard-Spock!')
-prompt("The first player to win #{GAMES_TO_WIN} games is the grand winner!")
 loop do
+  greet_player
   play_match
   break unless play_again?
 end
