@@ -21,40 +21,6 @@ def prompt(message)
   sleep(0.75)
 end
 
-def play_match
-  games_won = { 'you': 0, 'the computer': 0 }
-  grand_winner = nil
-  game_count = 0
-
-  prompt 'A new match has begun!'
-
-  loop do
-    game_count += 1
-    prompt("GAME #{game_count}")
-
-    game_result = play_game
-    display_result(game_result)
-    update_win_counts(games_won, game_result)
-    grand_winner = determine_grand_winner(games_won)
-    if grand_winner
-      prompt("The grand winner is #{grand_winner}!")
-      break
-    end
-    announce_win_counts(games_won, 'current')
-    await_player
-  end
-  announce_win_counts(games_won, 'final')
-end
-
-# Returns result of one game as 'win', 'lose', or 'tie'
-def play_game
-  choice = resolve_choice
-  computer_choice = VALID_CHOICES.sample
-
-  display_choices(choice, computer_choice)
-  get_result(choice, computer_choice)
-end
-
 def resolve_choice
   loop do
     prompt("Choose one: #{VALID_CHOICES.join(', ')}")
@@ -139,9 +105,41 @@ end
 
 ### MAIN GAMEPLAY LOGIC ###
 
+greet_player
+
+# This loop goes through the process of playing a match
 loop do
-  greet_player
-  play_match
+  games_won = { 'you': 0, 'the computer': 0 }
+  game_count = 0
+
+  prompt 'A new match has begun!'
+
+  # This loop goes through playing one game within a match
+  loop do
+    game_count += 1
+    prompt("GAME #{game_count}")
+
+    # Players make their choices
+    choice = resolve_choice
+    computer_choice = VALID_CHOICES.sample
+
+    display_choices(choice, computer_choice)
+    get_result(choice, computer_choice) # Returns result of one game as 'win', 'lose', or 'tie'
+    display_result(game_result)
+    update_win_counts(games_won, game_result)
+
+    grand_winner = determine_grand_winner(games_won)
+    if grand_winner
+      prompt("The match is over! The grand winner is #{grand_winner}!")
+      break
+    end
+
+    announce_win_counts(games_won, 'current')
+    await_player
+  end
+
+  announce_win_counts(games_won, 'final')
   break unless play_again?
 end
+
 prompt 'Thanks for playing. Goodbye!'
