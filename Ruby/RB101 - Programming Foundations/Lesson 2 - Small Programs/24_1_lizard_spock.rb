@@ -1,6 +1,8 @@
 VALID_CHOICES = %w[rock paper scissors spock lizard]
 GAMES_TO_WIN = 3
 
+### METHODS ###
+
 def greet_player
   system('clear')
   prompt('Welcome to Rock-Paper-Scissors-Lizard-Spock!')
@@ -71,9 +73,9 @@ end
 # Handles the edge case where the player enters "s",
 # which could mean scissors or Spock.
 def handle_s
+  prompt('Not sure if you mean scissors or Spock.')
+  prompt('Enter 1 for scissors or 2 for Spock.')
   loop do
-    prompt('Not sure if you mean scissors or Spock.')
-    prompt('Enter 1 for scissors or 2 for Spock.')
     case gets.chomp
     when '1'
       return 'scissors'
@@ -134,6 +136,8 @@ def play_again?
   answer = Kernel.gets.chomp
   answer.downcase.start_with?('y')
 end
+
+### MAIN GAMEPLAY LOGIC ###
 
 loop do
   greet_player
