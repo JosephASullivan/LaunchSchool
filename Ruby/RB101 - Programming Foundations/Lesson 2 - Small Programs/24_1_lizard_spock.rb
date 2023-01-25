@@ -20,10 +20,6 @@ def play_match
       break
     end
     announce_win_counts(games_won, 'current')
-    unless play_another?('game')
-      prompt "You quit the match!"
-      break
-    end
   end
   announce_win_counts(games_won, 'final')
 end
@@ -113,8 +109,8 @@ def announce_win_counts(games_won, match_status)
   prompt("Player #{games_won[:'you']}, Computer #{games_won[:'the computer']}")
 end
 
-def play_another?(contest_type)
-  prompt("Do you want to play another #{contest_type}? (Y/N)")
+def play_again?
+  prompt("Do you want to play again? (Y/N)")
   answer = Kernel.gets().chomp()
   answer.downcase().start_with?('y')
 end
@@ -123,6 +119,6 @@ prompt("Welcome to Rock-Paper-Scissors-Lizard-Spock!")
 prompt("The first player to win #{GAMES_TO_WIN} games is the grand winner!")
 loop do
   play_match
-  break unless play_another?("match")
+  break unless play_again?
 end
 prompt "Thanks for playing. Goodbye!"
