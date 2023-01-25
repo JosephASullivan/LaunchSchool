@@ -3,6 +3,11 @@ GAMES_TO_WIN = 3
 
 ### METHODS ###
 
+def prompt(message)
+  Kernel.puts("=> #{message}")
+  sleep(0.75)
+end
+
 def greet_player
   system('clear')
   prompt('Welcome to Rock-Paper-Scissors-Lizard-Spock!')
@@ -16,17 +21,12 @@ def await_player
   system('clear')
 end
 
-def prompt(message)
-  Kernel.puts("=> #{message}")
-  sleep(0.75)
-end
-
 def resolve_choice
   loop do
     prompt("Choose one: #{VALID_CHOICES.join(', ')}")
     choice = Kernel.gets.chomp.downcase
     unless choice.empty?
-      choice = handle_s if choice == 's'
+      choice = handle_s if choice == 's' # Edge case (see next method)
       VALID_CHOICES.each do |option|
         choice = option if option.start_with? choice
       end
