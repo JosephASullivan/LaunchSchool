@@ -1,0 +1,8 @@
+1. idiomatic
+2. non-idiomatic
+3. idiomatic
+4. non-idiomatic
+5. illegal
+6. idiomatic
+7. non-idiomatic
+8. non-idiomatic
